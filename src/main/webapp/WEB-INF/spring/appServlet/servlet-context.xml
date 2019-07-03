@@ -22,8 +22,12 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.sh.s6" />
+	
+	
 	<context:component-scan base-package="com.sh.board.notice"/>
 	<context:component-scan base-package="com.sh.board.qna"/>
-	
+	<context:component-scan base-package="com.sh.file"/>
+	<context:component-scan base-package="com.sh.util"/>
+	<context:component-scan base-package="com.sh.member"/>
 	
 </beans:beans>

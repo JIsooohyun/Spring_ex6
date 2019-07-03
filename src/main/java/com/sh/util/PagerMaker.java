@@ -1,6 +1,6 @@
 package com.sh.util;
 
-public class PageMaker {
+public class PagerMaker {
 	private Integer curPage;  //레퍼런스 타입이라서 null이 들어갈 수 있다. 
 	private String kind; 
 	private String search;
@@ -18,6 +18,9 @@ public class PageMaker {
 	
 	
 	public Integer getCurPage() {
+		if(this.curPage==null) {
+			this.curPage =1;
+		}
 		return curPage;
 	}
 	public int getTotalBlock() {
@@ -45,6 +48,9 @@ public class PageMaker {
 		this.kind = kind;
 	}
 	public String getSearch() {
+		if(this.search == null) {
+			this.search ="";
+		}
 		return search;
 	}
 	public void setSearch(String search) {
@@ -59,7 +65,7 @@ public class PageMaker {
 
 	//startRow, lastRow
 	public void makeRow() {
-		this.startRow = (this.curPage-1)*this.perPage+1;
+		this.startRow = (this.getCurPage()-1)*this.perPage+1;
 		this.lastRow = this.curPage*this.perPage;
 	}
 	

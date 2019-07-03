@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="MemberMapper">
+	<sql id="colums">
+		id, pw, name, email, grade
+	</sql>
+	<insert id="setWrtie" parameterType="com.sh.member.MemberDTO">
+		insert into member  (<include refid="colums"/>) values(#{id}, #{pw}, #{name}, #{email}, 3)		
+	</insert>
+	
+<!-- 	<resultMap type="com.sh.member.MemberDTO" id="member">
+		<id property="id" column="id"/>pk 매핑할 때 사용
+		<result property="email" column="email"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="grade" column="grade"/>
+		<result property="memberFileDTO.num" column="num" />
+		<result property="memberFileDTO.fname" column="fname" />
+		<result property="memberFileDTO.oname" column="oname" />
+	</resultMap> -->
+	
+	
+	<resultMap type="com.sh.member.MemberDTO" id="member">
+		<id property="id" column="id"/>
+		<result property="email" column="email"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="grade" column="grade"/>
+		<association property="memberFileDTO" javaType="com.sh.file.MemberFileDTO" resultMap="fileResult">
+		</association>
+	</resultMap>
+	
+	<resultMap type="com.sh.file.MemberFileDTO" id="fileResult">
+		<id property="id" column="id"/>
+			<result property="email" column="email"/>
+			<result property="pw" column="pw"/>
+			<result property="name" column="name"/>
+			<result property="grade" column="grade"/>
+			<association property="memberFileDTO" javaType="com.sh.file.MemberFileDTO">
+			</association>
+	</resultMap>
+	<select id="getSelect" resultMap="member" parameterType="com.sh.member.MemberDTO">
+		select M.*, F.*
+		from member M inner join MEMBERFILE F
+		on (M.id=F.id)
+		where M.id=#{id} and M.pw=#{pw}
+	</select>
+</mapper>

@@ -13,15 +13,27 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.sh.board.BoardDTO;
+import com.sh.member.MemberDTO;
 import com.sh.s6.AbstractTest;
+import com.sh.util.PagerMaker;
 public class NoticeDAOTest extends AbstractTest{
 	
 	@Inject //주입을 해줘도 들어오지 않는다. -> Annotation을 사용해라! 
 	private NoticeDAO noticeDAO;
 	
-
+	
+	
 	
 	@Test
+	public void getCount()throws Exception{
+		PagerMaker pageMaker = new PagerMaker();
+		pageMaker.setKind("1");
+		pageMaker.setSearch("i");
+		int result = noticeDAO.getTotalCount(pageMaker);
+		System.out.println(result);
+		assertEquals(1, result);
+	}
+	/*@Test
 	public void selectList()throws Exception{
 		//List<BoardDTO> ar = noticeDAO.getList();
 		//assertEquals(3, ar.size());
@@ -77,7 +89,7 @@ public class NoticeDAOTest extends AbstractTest{
 	public void test() throws Exception{
 		BoardDTO boardDTO = noticeDAOImpl.getSelect(8);
 		assertNotNull(boardDTO);
-	}*/
+	}
 
 	
 	@Before//테스트 메서드 각각 실행전 한번씩 실행
@@ -90,5 +102,5 @@ public class NoticeDAOTest extends AbstractTest{
 	public void t3() {} 
 	
 	@AfterClass//전체 테스트 후 딱 한번 실행
-	public static void t4() {}
+	public static void t4() {}*/
 }

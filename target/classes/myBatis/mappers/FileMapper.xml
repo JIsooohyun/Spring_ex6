@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="FileMapper">
+	<insert id="setWrite" parameterType="java.util.List">
+		insert into files values 
+		(notice_seq.nextval, #{item.num}, #{item.fname}, #{item.oname})
+	</insert>
+	
+	<update id="setUpdate" parameterType="com.sh.file.FileDTO">
+		update files set fname=#{fname}, oname=#{oname} where fnum=#{fnum}
+	</update>
+	
+	<delete id="setDelete" parameterType="java.lang.Integer">
+		delete files where fnum=#{fnum}
+	</delete>
+	
+	<select id="getSelect" parameterType="java.lang.Integer" resultType="com.sh.file.FileDTO">
+		select * from files where fnum=#{fnum}
+	</select>
+	
+	<select id="getList" resultType="com.sh.file.FileDTO" parameterType="java.lang.Integer">
+		select * from files where num=#{num}
+	</select>
+</mapper>

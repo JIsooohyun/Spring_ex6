@@ -3,7 +3,6 @@ package com.sh.board.notice;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sh.board.BoardDAO;
 import com.sh.board.BoardDTO;
-import com.sh.util.PageMaker;
+import com.sh.util.PagerMaker;
 
 @Repository
 public class NoticeDAO implements BoardDAO{
@@ -20,43 +19,43 @@ public class NoticeDAO implements BoardDAO{
 	
 	@Inject
 	private SqlSession sqlSession;
-	private String mapper = "NoticeMapper.";
+	private static final String NAMESPACE = "NoticeMapper.";
 	
 	@Override
 	public int setDelete(int num) throws Exception {
-		int result = sqlSession.delete(mapper+"noticeDelete", num);
+		int result = sqlSession.delete(NAMESPACE+"noticeDelete", num);
 		return result;
 	}
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
-		int result = sqlSession.update(mapper+"noticeUpdate", boardDTO);
+		int result = sqlSession.update(NAMESPACE+"noticeUpdate", boardDTO);
 		return result;
 	}
 
 	@Override
 	public int setWrtire(BoardDTO boardDTO) throws Exception {
-		int result = sqlSession.insert(mapper+"noticeWrite", boardDTO);
+		
+		int result = sqlSession.insert(NAMESPACE+"noticeWrite", boardDTO);
+		
 		return result;
 	}
 
 	@Override
-	public List<BoardDTO> getList(PageMaker pageMaker) throws Exception {
+	public List<BoardDTO> getList(PagerMaker pageMaker) throws Exception {
 		
-		return sqlSession.selectList(mapper+"noticeList", pageMaker);
+		return sqlSession.selectList(NAMESPACE+"noticeList", pageMaker);
 	}
 
 	@Override
 	public BoardDTO getSelect(int num) throws Exception {
-		return sqlSession.selectOne(mapper+"noticeSelect", num);
+		return sqlSession.selectOne(NAMESPACE+"noticeSelect", num);
 	}
 
 	@Override
-	public int getTotalCount(PageMaker pageMaker) throws Exception {
-		int result = sqlSession.selectOne(mapper+"totalCount", pageMaker);
+	public int getTotalCount(PagerMaker pageMaker) throws Exception {
+		int result = sqlSession.selectOne(NAMESPACE+"totalCount", pageMaker);
 		return result;
 	}
-	
-	
 	
 }

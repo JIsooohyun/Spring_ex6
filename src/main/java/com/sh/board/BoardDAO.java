@@ -2,7 +2,7 @@ package com.sh.board;
 
 import java.util.List;
 
-import com.sh.util.PageMaker;
+import com.sh.util.PagerMaker;
 
 public interface BoardDAO {
 	
@@ -15,10 +15,10 @@ public interface BoardDAO {
 	public int setWrtire(BoardDTO boardDTO)throws Exception;
 	
 	//글 리스트
-	public List<BoardDTO> getList(PageMaker pageMaker)throws Exception;
+	public List<BoardDTO> getList(PagerMaker pageMaker)throws Exception;
 	
 	//글 하나
 	public BoardDTO getSelect(int num)throws Exception;
 	
-	public int getTotalCount(PageMaker pageMaker)throws Exception;
+	public int getTotalCount(PagerMaker pageMaker)throws Exception;
 }

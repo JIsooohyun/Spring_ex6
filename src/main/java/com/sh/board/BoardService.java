@@ -2,8 +2,11 @@ package com.sh.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
-import com.sh.util.PageMaker;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.sh.util.PagerMaker;
 
 public interface BoardService {
 
@@ -13,10 +16,10 @@ public interface BoardService {
 		public int setUpdate(BoardDTO boardDTO)throws Exception;
 		
 		//글을 등록
-		public int setWrtire(BoardDTO boardDTO)throws Exception;
-		
+		public int setWrtire(BoardDTO boardDTO, List<MultipartFile> multipartFiles, HttpSession session)throws Exception;
+				
 		//글 리스트
-		public List<BoardDTO> getList(PageMaker pageMaker)throws Exception;
+		public List<BoardDTO> getList(PagerMaker pageMaker)throws Exception;
 		
 		//글 하나
 		public BoardDTO getSelect(int num)throws Exception;	
