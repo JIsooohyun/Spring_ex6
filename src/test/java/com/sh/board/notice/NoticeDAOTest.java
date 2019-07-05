@@ -55,7 +55,7 @@ public class NoticeDAOTest extends AbstractTest{
 		noticeDTO.setContents("shfksfjl");
 		int result = noticeDAO.setUpdate(noticeDTO);
 		assertEquals(1, result);
-	}
+	}*/
 	@Test
 	public void test()throws Exception{
 		NoticeDTO noticeDTO = new NoticeDTO();

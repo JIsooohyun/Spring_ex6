@@ -1,12 +1,16 @@
+select qna_seq.nextval from dual
+select * from qna;
 select M.id, M.name, F.*fname
 from member M inner join MEMBERFILE F
 on (M.id=F.id)
 where M.id='aaa' and M.pw='aaa'
 
+drop table qna;
 select N.*, F.*
 from notice N inner join files F
 on (N.num=F.num)
 where N.num=
+
 
 select * from notice where title like '%i%';
 
@@ -20,6 +24,7 @@ create table notice(
 	constraint notice_num_pk primary key (num)
 );
 
+select * from qna;
 
 create sequence memberfile_seq
 start with 1
@@ -52,3 +57,4 @@ create table member(
 );
 select * from memberfile;
 select * from member;
+

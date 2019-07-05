@@ -17,6 +17,7 @@ public class PagerMaker {
 	
 	
 	
+	
 	public Integer getCurPage() {
 		if(this.curPage==null) {
 			this.curPage =1;

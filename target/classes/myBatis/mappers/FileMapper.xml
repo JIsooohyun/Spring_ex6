@@ -4,11 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="FileMapper">
-	<insert id="setWrite" parameterType="java.util.List">
-		insert into files values 
-		(notice_seq.nextval, #{item.num}, #{item.fname}, #{item.oname})
+	<insert id="setWrite" parameterType="java.util.Map">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select notice_seq.nextval as id from dual
+		</selectKey>
+		Insert All
+		<foreach collection="list" item="item" separator=" " index="i"><!-- separator="어디까지 구분할꺼냐" index="" -->
+			into FILES <!-- (fnum, num, fname, oname) -->
+			values (notice_seq.nextval+#{i}, #{item.num}, #{item.fname},#{item.oname})
+		</foreach>
+		select * from dual
+		<!-- notice_seq.nextval은 Insert All할때 처음만 한다. -->
 	</insert>
-	
+	<!-- collection="너가 보내주는 애가 누구냐//List계열이면 변수명과 상관없이 list로 줘야한다. " -->
 	<update id="setUpdate" parameterType="com.sh.file.FileDTO">
 		update files set fname=#{fname}, oname=#{oname} where fnum=#{fnum}
 	</update>
